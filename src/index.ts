@@ -20,6 +20,4 @@ app
     console.log(`Server is listening on port ${port}`);
   });
 
-const dbString = `${db.conn}://${db.host}:${db.port}/${db.name}`;
-
-connect({ dbString });
+connect(db);

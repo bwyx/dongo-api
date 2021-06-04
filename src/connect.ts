@@ -1,19 +1,15 @@
 import mongoose from 'mongoose';
 
-type TDBInput = {
-  dbString: string;
-};
-
-export default ({ dbString }: TDBInput) => {
+export default (db: string) => {
   const connect = () => {
     mongoose
-      .connect(dbString, {
+      .connect(db, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
         useCreateIndex: true,
       })
       .then(() => {
-        return console.info(`Successfully connected to database: ${dbString}`);
+        return console.info(`Successfully connected to database: ${db}`);
       })
       .catch(error => {
         console.error('Error connecting to database: ', error);

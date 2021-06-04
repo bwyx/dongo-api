@@ -1,11 +1,4 @@
-import express, {
-  Application,
-  Request,
-  Response,
-  NextFunction,
-  urlencoded,
-  json,
-} from 'express';
+import express, { Application, urlencoded, json } from 'express';
 import routes from './routes';
 import connect from './connect';
 import { db, port } from './config';

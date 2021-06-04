@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-export default (db: string) => {
+export default (db: string): void => {
   const connect = () => {
     mongoose
       .connect(db, {
@@ -8,10 +8,8 @@ export default (db: string) => {
         useUnifiedTopology: true,
         useCreateIndex: true,
       })
-      .then(() => {
-        return console.info(`Successfully connected to database: ${db}`);
-      })
-      .catch(error => {
+      .then(() => console.info(`Successfully connected to database: ${db}`))
+      .catch((error) => {
         console.error('Error connecting to database: ', error);
         return process.exit(1);
       });

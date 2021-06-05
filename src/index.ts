@@ -1,16 +1,16 @@
-import express, { Application, urlencoded, json } from 'express';
-import routes from './routes';
-import connect from './connect';
-import { db, port } from './config';
+import mongoose from 'mongoose';
+import app from './app';
+import config from './config';
 
-const app: Application = express();
-
-app
-  .use(json())
-  .use(urlencoded({ extended: true }))
-  .use(routes)
-  .listen(port, () => {
-    console.log(`Server is listening on port ${port}`);
+mongoose
+  .connect(config.mongoose.url, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+  })
+  .then(() => {
+    console.info('Connected to MongoDB');
+    app.listen(config.port, () => {
+      console.info(`Listening to port ${config.port}`);
+    });
   });
-
-connect(db);

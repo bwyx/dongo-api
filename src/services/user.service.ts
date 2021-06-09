@@ -1,10 +1,10 @@
 import { ObjectId } from 'mongoose';
 import httpStatus from 'http-status';
 import User from '../models/user.model';
-import { IUser, IUserDocument } from '../interfaces/user.interface';
+import { IUser, UserDocument } from '../interfaces/user.interface';
 import ApiError from '../utils/ApiError';
 
-const createUser = async (userBody: IUser): Promise<IUserDocument> => {
+const createUser = async (userBody: IUser): Promise<UserDocument> => {
   if (await User.isEmailTaken(userBody.email)) {
     throw new ApiError(httpStatus.BAD_REQUEST, 'Email already taken');
   }
@@ -12,19 +12,19 @@ const createUser = async (userBody: IUser): Promise<IUserDocument> => {
   return user;
 };
 
-const getAllUsers = async (): Promise<IUserDocument[] | null> => {
+const getAllUsers = async (): Promise<UserDocument[] | null> => {
   return User.find();
 };
 
-const getUserById = async (id: ObjectId | string): Promise<IUserDocument | null> => {
+const getUserById = async (id: ObjectId | string): Promise<UserDocument | null> => {
   return User.findById(id);
 };
 
-const getUserByEmail = async (email: string): Promise<IUserDocument | null> => {
+const getUserByEmail = async (email: string): Promise<UserDocument | null> => {
   return User.findOne({ email });
 };
 
-const updateUserById = async (userId: ObjectId | string, updateBody: IUser): Promise<IUserDocument | null> => {
+const updateUserById = async (userId: ObjectId | string, updateBody: IUser): Promise<UserDocument | null> => {
   const user = await getUserById(userId);
   if (!user) {
     throw new ApiError(httpStatus.NOT_FOUND, 'User not found');
@@ -37,7 +37,7 @@ const updateUserById = async (userId: ObjectId | string, updateBody: IUser): Pro
   return user;
 };
 
-const deleteUserById = async (userId: ObjectId | string): Promise<IUserDocument | null> => {
+const deleteUserById = async (userId: ObjectId | string): Promise<UserDocument | null> => {
   const user = await getUserById(userId);
   if (!user) {
     throw new ApiError(httpStatus.NOT_FOUND, 'User not found');
@@ -46,7 +46,7 @@ const deleteUserById = async (userId: ObjectId | string): Promise<IUserDocument 
   return user;
 };
 
-export = {
+export default {
   createUser,
   getAllUsers,
   getUserById,

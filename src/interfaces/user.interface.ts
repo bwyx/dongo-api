@@ -8,9 +8,9 @@ export interface IUser {
   isEmailVerified: boolean;
 }
 
-export interface IUserDocument extends IUser, Document {}
+export interface UserDocument extends IUser, Document {}
 
-export interface IUserModel extends Model<IUserDocument> {
+export interface UserModel extends Model<UserDocument> {
   isEmailTaken: (email: string, excludeUserId?: ObjectId | string) => boolean;
   isPasswordMatch: (password: string) => boolean;
 }

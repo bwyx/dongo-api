@@ -1,5 +1,5 @@
 /* eslint-disable no-param-reassign */
-import mongoose from 'mongoose';
+import { Schema, ObjectId, model } from 'mongoose';
 import validator from 'validator';
 import bcrypt from 'bcryptjs';
 import roles from '../config/roles';
@@ -7,7 +7,7 @@ import toJSON from './plugins/toJSON';
 
 import { UserDocument, UserModel } from '../interfaces/user.interface';
 
-const userSchema = new mongoose.Schema<UserDocument>(
+const userSchema = new Schema<UserDocument, UserModel>(
   {
     name: {
       type: String,
@@ -54,12 +54,12 @@ const userSchema = new mongoose.Schema<UserDocument>(
   }
 );
 
-userSchema.statics.isEmailTaken = async function (email, excludeUserId) {
+userSchema.statics.isEmailTaken = async function (email: string, excludeUserId: ObjectId) {
   const user = await this.findOne({ email, _id: { $ne: excludeUserId } });
   return !!user;
 };
 
-userSchema.methods.isPasswordMatch = async function (password) {
+userSchema.methods.isPasswordMatch = async function (password: string) {
   return bcrypt.compare(password, this.password);
 };
 
@@ -72,6 +72,4 @@ userSchema.pre('save', async function (next) {
   next();
 });
 
-const User = mongoose.model<UserDocument, UserModel>('User', userSchema);
-
-export default User;
+export default model<UserDocument, UserModel>('User', userSchema);

@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 import mongoose from 'mongoose';
 import validator from 'validator';
 import bcrypt from 'bcryptjs';
@@ -29,6 +30,7 @@ const userSchema = new mongoose.Schema<IUserDocument>(
       required: true,
       trim: true,
       minlength: 8,
+      select: false,
       validate(value: string) {
         if (!value.match(/\d/) || !value.match(/[a-zA-Z]/)) {
           throw new Error('Password must contain at least one letter and one number');
@@ -39,6 +41,7 @@ const userSchema = new mongoose.Schema<IUserDocument>(
       type: String,
       enum: roles,
       default: 'user',
+      select: false,
     },
     isEmailVerified: {
       type: Boolean,
@@ -47,6 +50,17 @@ const userSchema = new mongoose.Schema<IUserDocument>(
   },
   {
     timestamps: true,
+    toJSON: {
+      virtuals: true,
+      versionKey: false,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      transform: (_doc, ret: any): void => {
+        // eslint-disable-next-line no-underscore-dangle
+        delete ret._id;
+        delete ret.updatedAt;
+        delete ret.createdAt;
+      },
+    },
   }
 );
 

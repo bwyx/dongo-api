@@ -14,7 +14,7 @@
     "sourceType": "module"
   },
   "rules": {
-    "no-console": "off",
+    "no-console": 1,
     "func-names": "off",
     "import/extensions": [
       "error",

@@ -2,7 +2,7 @@
 import { Schema, ObjectId, model } from 'mongoose';
 import validator from 'validator';
 import bcrypt from 'bcryptjs';
-import roles from '../config/roles';
+import { roles } from '../config/roles';
 import toJSON from './plugins/toJSON';
 
 import { UserDocument, UserModel } from '../interfaces/user.interface';

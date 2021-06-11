@@ -1,8 +1,9 @@
 import jwt from 'jsonwebtoken';
 import moment, { Moment } from 'moment';
 import { ObjectId } from 'mongoose';
+
+import { Token } from '../models';
 import config from '../config';
-import Token from '../models/token.model';
 import tokenTypes from '../config/tokens';
 
 import { TokenDocument, TokenResponse, TokenPayload, UserDocument } from '../interfaces';

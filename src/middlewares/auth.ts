@@ -1,7 +1,7 @@
 import passport from 'passport';
 import httpStatus from 'http-status';
 import { Request, Response, NextFunction } from 'express';
-import ApiError from '../utils/ApiError';
+import { ApiError } from '../utils';
 import { roleRights } from '../config/roles';
 
 const verifyCallback =

@@ -1,13 +1,6 @@
 import { CustomValidator } from 'joi';
 
-export const objectId: CustomValidator<string> = (value, helpers) => {
-  if (!value.match(/^[0-9a-fA-F]{24}$/)) {
-    return helpers.message({ custom: `"${value}" is not a valid {{#label}}` });
-  }
-  return value;
-};
-
-export const password: CustomValidator<string> = (value, helpers) => {
+const password: CustomValidator<string> = (value, helpers) => {
   const tooShort = value.length < 8;
   const tooShortMessage = 'be at least 8 characters';
 
@@ -28,3 +21,5 @@ export const password: CustomValidator<string> = (value, helpers) => {
 
   return value;
 };
+
+export default password;

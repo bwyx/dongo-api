@@ -1,11 +1,11 @@
 /* eslint-disable no-param-reassign */
-import { Schema, ObjectId, model } from 'mongoose';
-import validator from 'validator';
 import bcrypt from 'bcryptjs';
-import { roles } from '../config/roles';
-import toJSON from './plugins/toJSON';
+import validator from 'validator';
+import { Schema, ObjectId, model } from 'mongoose';
 
-import { UserDocument, UserModel } from '../interfaces/user.interface';
+import toJSON from './plugins/toJSON';
+import { roles } from '../config/roles';
+import { UserDocument, UserModel } from '../interfaces';
 
 const userSchema = new Schema<UserDocument, UserModel>(
   {

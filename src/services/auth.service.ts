@@ -1,10 +1,10 @@
 import httpStatus from 'http-status';
+
 import tokenService from './token.service';
 import userService from './user.service';
-import Token from '../models/token.model';
-import ApiError from '../utils/ApiError';
 import tokenTypes from '../config/tokens';
-
+import { Token } from '../models';
+import { ApiError } from '../utils';
 import { TokenResponse, UserDocument } from '../interfaces';
 
 const loginUserWithEmailAndPassword = async (email: string, password: string): Promise<UserDocument> => {

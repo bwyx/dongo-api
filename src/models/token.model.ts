@@ -1,7 +1,7 @@
 import { Schema, SchemaTypes, Model, model } from 'mongoose';
-import tokenTypes from '../config/tokens';
 
-import { TokenDocument } from '../interfaces/token.interface';
+import tokenTypes from '../config/tokens';
+import { TokenDocument } from '../interfaces';
 
 const tokenSchema = new Schema<TokenDocument>(
   {

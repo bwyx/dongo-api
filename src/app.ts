@@ -1,10 +1,11 @@
 import express from 'express';
 import passport from 'passport';
 import httpStatus from 'http-status';
+
 import jwtStrategy from './config/passport';
 import v1Routes from './routes/v1';
-import { errorConverter, errorHandler } from './middlewares/error';
-import ApiError from './utils/ApiError';
+import { errorConverter, errorHandler } from './middlewares';
+import { ApiError } from './utils';
 
 const app = express();
 
@@ -22,7 +23,7 @@ passport.use('jwt', jwtStrategy);
 app.use('/v1', v1Routes);
 
 // send back a 404 error for any unknown api request
-app.use((req, res, next) => {
+app.use((_req, _res, next) => {
   next(new ApiError(httpStatus.NOT_FOUND, 'Not found'));
 });
 

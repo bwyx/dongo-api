@@ -1,6 +1,7 @@
 import httpStatus from 'http-status';
-import catchAsync from '../utils/catchAsync';
+
 import { userService, tokenService, authService } from '../services';
+import { catchAsync } from '../utils';
 
 const register = catchAsync(async (req, res) => {
   const user = await userService.createUser(req.body);

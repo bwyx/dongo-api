@@ -1,4 +1,9 @@
 import express from 'express';
+import helmet from 'helmet';
+import cors from 'cors';
+import hpp from 'hpp';
+import xss from 'xss-clean';
+import mongoSanitize from 'express-mongo-sanitize';
 import passport from 'passport';
 import httpStatus from 'http-status';
 
@@ -9,11 +14,18 @@ import { ApiError } from './utils';
 
 const app = express();
 
+app.use(helmet()); // set security HTTP headers
+
 // parse json request body
 app.use(express.json());
 
 // parse urlencoded request body
 app.use(express.urlencoded({ extended: true }));
+
+app.use(xss()); // prevent a harmful script being sent with the request
+app.use(hpp()); // prevent HTTP Parameter Pollution.
+app.use(mongoSanitize()); // prevent NoSql injections
+app.use(cors()); // enable cors
 
 // jwt authentication
 app.use(passport.initialize());

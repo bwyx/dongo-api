@@ -1,8 +1,9 @@
-import { ObjectId } from 'mongoose';
 import httpStatus from 'http-status';
-import User from '../models/user.model';
+import { ObjectId } from 'mongoose';
+
+import { User } from '../models';
+import { ApiError } from '../utils';
 import { IUser, UserDocument } from '../interfaces/user.interface';
-import ApiError from '../utils/ApiError';
 
 const createUser = async (userBody: IUser): Promise<UserDocument> => {
   if (await User.isEmailTaken(userBody.email)) {

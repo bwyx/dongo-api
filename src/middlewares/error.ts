@@ -1,8 +1,9 @@
-import { Request, Response, NextFunction } from 'express';
 import mongoose from 'mongoose';
 import httpStatus from 'http-status';
+import { Request, Response, NextFunction } from 'express';
+
 import config from '../config';
-import ApiError from '../utils/ApiError';
+import { ApiError } from '../utils';
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/no-explicit-any
 const errorConverter = (err: any, _req: Request, _res: Response, next: NextFunction): void => {

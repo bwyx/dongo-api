@@ -1,8 +1,8 @@
-import { Request, Response, NextFunction } from 'express';
-import Joi, { Context } from 'joi';
 import httpStatus from 'http-status';
-import pick from '../utils/pick';
-import ApiError from '../utils/ApiError';
+import Joi, { Context } from 'joi';
+import { Request, Response, NextFunction } from 'express';
+
+import { ApiError, pick } from '../utils';
 
 const validate =
   (schema: Context) =>
